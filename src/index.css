@@ -2,41 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Programming Education Platform Design System 
+All colors MUST be HSL - Modern developer-focused theme
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core background and text */
+    --background: 210 20% 98%;
+    --foreground: 215 25% 27%;
 
+    /* Card and surface colors */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 25% 27%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 215 25% 27%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary brand colors - Electric blue theme */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 217 91% 70%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary colors */
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 215 25% 27%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted colors for subtle elements */
+    --muted: 214 32% 91%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent colors - Vibrant purple */
+    --accent: 262 83% 58%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Status colors */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Code editor specific colors */
+    --editor-bg: 220 13% 18%;
+    --editor-foreground: 220 14% 71%;
+    --editor-selection: 217 91% 60% / 0.3;
+    --editor-line-numbers: 220 14% 45%;
+    
+    /* Syntax highlighting */
+    --syntax-keyword: 262 83% 58%;
+    --syntax-string: 142 76% 36%;
+    --syntax-number: 38 92% 50%;
+    --syntax-comment: 220 14% 45%;
+    --syntax-function: 217 91% 60%;
+    --syntax-variable: 47 100% 67%;
 
-    --radius: 0.5rem;
+    /* Interactive elements */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 60%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-code: linear-gradient(145deg, hsl(var(--editor-bg)), hsl(220 13% 15%));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    
+    /* Shadows and effects */
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+    --shadow-code: 0 8px 32px hsl(220 13% 8% / 0.4);
+    --glow-primary: 0 0 40px hsl(var(--primary-glow) / 0.4);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +142,88 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    /* Smooth font rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  /* Code Editor Styles */
+  .code-editor {
+    @apply bg-[hsl(var(--editor-bg))] text-[hsl(var(--editor-foreground))];
+    @apply font-mono text-sm leading-relaxed;
+    box-shadow: var(--shadow-code);
+  }
+
+  .code-line-numbers {
+    @apply text-[hsl(var(--editor-line-numbers))] select-none;
+    @apply border-r border-[hsl(var(--editor-line-numbers))] pr-4 mr-4;
+  }
+
+  .syntax-keyword { @apply text-[hsl(var(--syntax-keyword))] font-semibold; }
+  .syntax-string { @apply text-[hsl(var(--syntax-string))]; }
+  .syntax-number { @apply text-[hsl(var(--syntax-number))]; }
+  .syntax-comment { @apply text-[hsl(var(--syntax-comment))] italic; }
+  .syntax-function { @apply text-[hsl(var(--syntax-function))] font-medium; }
+  .syntax-variable { @apply text-[hsl(var(--syntax-variable))]; }
+
+  /* Gradient backgrounds */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .gradient-code {
+    background: var(--gradient-code);
+  }
+
+  /* Glow effects */
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+
+  /* Interactive code blocks */
+  .interactive-code {
+    @apply rounded-lg p-6 code-editor;
+    @apply transition-smooth hover:shadow-lg;
+  }
+
+  /* Tutorial steps */
+  .tutorial-step {
+    @apply border-l-4 border-primary pl-6 py-4;
+    @apply transition-smooth hover:border-accent;
+  }
+
+  .tutorial-step.completed {
+    @apply border-success bg-success/5;
+  }
+
+  /* Analysis indicators */
+  .error-indicator {
+    @apply bg-destructive/10 border border-destructive/20 text-destructive;
+    @apply rounded-md px-3 py-2 flex items-center gap-2;
+  }
+
+  .success-indicator {
+    @apply bg-success/10 border border-success/20 text-success;
+    @apply rounded-md px-3 py-2 flex items-center gap-2;
+  }
+
+  .warning-indicator {
+    @apply bg-warning/10 border border-warning/20 text-warning;
+    @apply rounded-md px-3 py-2 flex items-center gap-2;
   }
 }
